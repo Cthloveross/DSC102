@@ -11,8 +11,8 @@ def PA0(path_to_user_reviews_csv):
     client = Client()
     # Helps fix any memory leaks.
     client.run(trim_memory)
-	client = client.restart()
-    user_reviews_ddf = dd.read_csv("user_reviews.csv")
+    client = client.restart()
+    user_reviews_ddf = dd.read_csv(path_to_user_reviews_csv)
     user_reviews_ddf['number_products_rated'] = user_reviews_ddf['asin']
     user_reviews_ddf['avg_ratings'] = user_reviews_ddf['overall']
     # we want to xtract the year
@@ -28,6 +28,6 @@ def PA0(path_to_user_reviews_csv):
 
     
     
-    submit = <YOUR_USERS_DATAFRAME>.describe().compute().round(2)    
+    submit = result_df.describe().compute().round(2)    
     with open('results_PA0.json', 'w') as outfile: 
         json.dump(json.loads(submit.to_json()), outfile)
